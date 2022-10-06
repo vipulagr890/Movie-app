@@ -2,18 +2,18 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -22,9 +22,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
 }
 
@@ -34,5 +34,107 @@
   }
   to {
     transform: rotate(360deg);
+  }
+} */
+
+.Navbar-links {
+  text-decoration: none;
+  color: white;
+  display: flex;
+}
+
+.banner-card {
+  width: 100%;
+  margin-bottom: 3vh;
+  position: relative;
+  height: 80vh;
+  color: white;
+}
+
+.banner-card .banner-img {
+  height: 80vh;
+  width: 100%;
+}
+
+.banner-card .banner-title {
+  position: absolute;
+  top: 45vh;
+  left: 5vw;
+}
+
+.banner-card .banner-text {
+  position: absolute;
+  top: 50vh;
+  left: 5%;
+  height: 4.5rem;
+  overflow: hidden;
+  margin-right: 5%;
+}
+
+.movies-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.movie-card {
+  color: white;
+  height: 30vh;
+  width: 20%;
+  position: relative;
+}
+
+.movie-card .movie-img {
+  height: 30vh;
+  width: 100%;
+}
+
+.movie-card .movie-title {
+  position: absolute;
+  top: 6vh;
+}
+
+.movie-card .content-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.movie-card .movie-btn {
+  position: absolute;
+  top: 20vh;
+}
+
+@media screen and (max-width: 450px) {
+  .banner-card {
+    height: 30vh;
+  }
+
+  .banner-card .banner-img {
+    height: 30vh;
+  }
+
+  .banner-card .banner-title {
+    top: 14vh;
+  }
+
+  .banner-card .banner-text {
+    top: 18vh;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .movie-card {
+    width: 100%;
+    margin: 0 1rem;
+  }
+
+  .movie-card .movie-img {
+    width: 100%;
+  }
+
+  .movie-card .movie-btn {
+    width: 80vw;
   }
 }
