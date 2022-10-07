@@ -6,7 +6,6 @@ import axios from "axios";
 
 const Movies = () => {
   const [page, setPage] = useState(1);
-  // const [currPage, setCurrPage] = useState(1);
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -31,6 +30,8 @@ const Movies = () => {
     setPage(page + 1);
   };
 
+  const handleFav = () => {};
+
   return (
     <>
       {movies.length === 0 ? (
@@ -53,7 +54,10 @@ const Movies = () => {
                       />
                       <div className="content-wrapper">
                         <h5 className="movie-title">{movie.title}</h5>
-                        <a href="movies" className="btn btn-primary movie-btn">
+                        <a
+                          className="btn btn-primary movie-btn"
+                          onClick={handleFav}
+                        >
                           Add to Favourite
                         </a>
                       </div>
@@ -77,6 +81,7 @@ const Movies = () => {
                     className="page-link"
                     aria-label="Previous"
                     onClick={handlePrev}
+                    style={page === 1 ? { opacity: "50%" } : { opacity: "100%" }}
                   >
                     <span aria-hidden="true">&laquo;</span>
                   </a>
