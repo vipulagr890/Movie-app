@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import movie from "../bannerimage.jpg";
 import { v4 as uuid } from "uuid";
 import Loader from "./Loader";
 import axios from "axios";
@@ -81,7 +80,9 @@ const Movies = () => {
                     className="page-link"
                     aria-label="Previous"
                     onClick={handlePrev}
-                    style={page === 1 ? { opacity: "50%" } : { opacity: "100%" }}
+                    style={
+                      page === 1 ? { opacity: "50%" } : { opacity: "100%" }
+                    }
                   >
                     <span aria-hidden="true">&laquo;</span>
                   </a>
