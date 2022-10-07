@@ -13,9 +13,8 @@ const Movies = () => {
         `https://api.themoviedb.org/3/trending/all/day?api_key=9091a453a803592ba02bafa6bb228728&page=${page}`
       );
       let data = res.data;
-      // console.log(data.results);
+      console.log(data.results);
       setMovies([...data.results]);
-      console.log(movies);
     };
   }, [page]);
 
@@ -54,6 +53,7 @@ const Movies = () => {
                       <div className="content-wrapper">
                         <h5 className="movie-title">{movie.title}</h5>
                         <a
+                          href={page}
                           className="btn btn-primary movie-btn"
                           onClick={handleFav}
                         >
@@ -76,7 +76,7 @@ const Movies = () => {
             <nav aria-label="Page navigation example">
               <ul className="pagination">
                 <li className="page-item">
-                  <a
+                  <button
                     className="page-link"
                     aria-label="Previous"
                     onClick={handlePrev}
@@ -85,23 +85,21 @@ const Movies = () => {
                     }
                   >
                     <span aria-hidden="true">&laquo;</span>
-                  </a>
+                  </button>
                 </li>
 
                 <li className="page-item">
-                  <a href={page} className="page-link">
-                    {page}
-                  </a>
+                  <button className="page-link">{page}</button>
                 </li>
 
                 <li className="page-item">
-                  <a
+                  <button
                     className="page-link"
                     aria-label="Next"
                     onClick={handleNext}
                   >
                     <span aria-hidden="true">&raquo;</span>
-                  </a>
+                  </button>
                 </li>
               </ul>
             </nav>
