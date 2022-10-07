@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import movie from "../bannerimage.jpg";
 import { v4 as uuid } from "uuid";
 import Loader from "./Loader";
+import axios from "axios";
 
 const Movies = () => {
-  let movies = [
-    { x: "x" },
-    { x: "y" },
-    { x: "x" },
-    { x: "y" },
-    { x: "x" },
-    { x: "y" },
-    { x: "y" },
-    { x: "x" },
-    { x: "y" },
-  ];
+  const [page, setPage] = useState(1);
+  // const [currPage, setCurrPage] = useState(1);
+  const [movies, setMovies] = useState([]);
 
-  const [pages] = useState([1, 2, 3]);
+  useEffect(() => {
+    return async () => {
+      let res = await axios.get(
+        `https://api.themoviedb.org/3/trending/all/day?api_key=9091a453a803592ba02bafa6bb228728&page=${page}`
+      );
+      let data = res.data;
+      // console.log(data.results);
+      setMovies([...data.results]);
+      console.log(movies);
+    };
+  }, [page]);
+
+  const handlePrev = () => {
+    if (page !== 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleNext = () => {
+    setPage(page + 1);
+  };
 
   return (
     <>
@@ -28,18 +41,18 @@ const Movies = () => {
             <strong>Trending</strong>
           </h3>
           <div className="movies-list">
-            {movies.map((moviess) => {
+            {movies.map((movie) => {
               return (
                 <div key={uuid()} className="card movie-card">
                   {
                     <div>
                       <img
-                        src={movie}
+                        src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                         className="card-img-top movie-img"
                         alt="..."
                       />
                       <div className="content-wrapper">
-                        <h5 className="movie-title">Card title</h5>
+                        <h5 className="movie-title">{movie.title}</h5>
                         <a href="movies" className="btn btn-primary movie-btn">
                           Add to Favourite
                         </a>
@@ -60,22 +73,27 @@ const Movies = () => {
             <nav aria-label="Page navigation example">
               <ul className="pagination">
                 <li className="page-item">
-                  <a href="1" className="page-link" aria-label="Previous">
+                  <a
+                    className="page-link"
+                    aria-label="Previous"
+                    onClick={handlePrev}
+                  >
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
 
-                {pages.map((page) => {
-                  return (
-                    <li className="page-item">
-                      <a href={page} className="page-link">
-                        {page}
-                      </a>
-                    </li>
-                  );
-                })}
                 <li className="page-item">
-                  <a href="google.com" className="page-link" aria-label="Next">
+                  <a href={page} className="page-link">
+                    {page}
+                  </a>
+                </li>
+
+                <li className="page-item">
+                  <a
+                    className="page-link"
+                    aria-label="Next"
+                    onClick={handleNext}
+                  >
                     <span aria-hidden="true">&raquo;</span>
                   </a>
                 </li>
