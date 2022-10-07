@@ -8,14 +8,11 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    return async () => {
-      let res = await axios.get(
+    axios
+      .get(
         `https://api.themoviedb.org/3/trending/all/day?api_key=9091a453a803592ba02bafa6bb228728&page=${page}`
-      );
-      let data = res.data;
-      console.log(data.results);
-      setMovies([...data.results]);
-    };
+      )
+      .then((resp) => setMovies([...resp.data.results]));
   }, [page]);
 
   const handlePrev = () => {
@@ -32,13 +29,13 @@ const Movies = () => {
 
   return (
     <>
+      <h3 style={{ marginBottom: "1rem", textAlign: "center" }}>
+        <strong>Trending</strong>
+      </h3>
       {movies.length === 0 ? (
-        <Loader />
+        <Loader className="movies-list" />
       ) : (
         <div style={{ textAlign: "center" }}>
-          <h3 style={{ marginBottom: "1rem" }}>
-            <strong>Trending</strong>
-          </h3>
           <div className="movies-list">
             {movies.map((movie) => {
               return (
