@@ -6,6 +6,7 @@ import axios from "axios";
 const Movies = () => {
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
+  const [Favorites, setfavorites] = useState([]);
 
   useEffect(() => {
     axios
@@ -25,7 +26,21 @@ const Movies = () => {
     setPage(page + 1);
   };
 
-  const handleFav = () => {};
+  const handleFav = (movie) => {
+    let favMovieData = JSON.parse(localStorage.getItem("movie-app") || "[]");
+    if (Favorites.includes(movie.id)) {
+      favMovieData = favMovieData.filter((m) => m.id !== movie.id);
+    } else {
+      favMovieData.push(movie);
+    }
+    localStorage.setItem("movie-app", JSON.stringify(favMovieData));
+    handleFavouritesState();
+  };
+  const handleFavouritesState = () => {
+    let oldData = JSON.parse(localStorage.getItem("movie-app") || "[]");
+    let temp = oldData.map((movie) => movie.id);
+    setfavorites([...temp]);
+  };
 
   return (
     <>
@@ -49,13 +64,14 @@ const Movies = () => {
                       />
                       <div className="content-wrapper">
                         <h5 className="movie-title">{movie.title}</h5>
-                        <a
-                          href={page}
+                        <button
                           className="btn btn-primary movie-btn"
-                          onClick={handleFav}
+                          onClick={() => handleFav(movie)}
                         >
-                          Add to Favourite
-                        </a>
+                          {Favorites.includes(movie.id)
+                            ? "Remove from favorite"
+                            : "Add to favorite"}
+                        </button>
                       </div>
                     </div>
                   }
